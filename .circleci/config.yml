@@ -7,6 +7,7 @@ jobs:
     docker:
      - image: cimg/base:2022.05
     steps:
+      - checkout
       - run: pwd
       - run: ls
       - run: cmake -Bbuild ./
