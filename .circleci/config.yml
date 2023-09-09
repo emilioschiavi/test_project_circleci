@@ -12,6 +12,8 @@ jobs:
       - run: ls
       - run: cmake -Bbuild ./
       - run: cd build
+      - run: pwd
+      - run: ls
       - run: make
       - run: cd ..
   # Test
