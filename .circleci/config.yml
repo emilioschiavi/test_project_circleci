@@ -2,25 +2,24 @@
 version: 2.1
 
 jobs:
-  # Job one with a unique name
-  say_hello:
+  # Build
+  build:
     docker:
      - image: cimg/base:2022.05
     steps:
-      - run: echo "Say hello to YAML!"
-      - run: gcc --version
-      - run: cmake --version
-  # Job two with a unique name
-  say_goodbye:
+      - run: cmake -Bbuild ./
+      - run: cd build
+      - run: make
+      - run: cd ..
+  # Test
+  test:
     docker:
      - image: cimg/base:2022.05
     steps:
-      - run: echo "Say goodbye to YAML!"
+      - run: build/test
 
 workflows:
-  # Name of workflow
-  hello_and_goodbye:
-    # List of jobs that will run
+  build_and_test:
     jobs:
-      - say_hello
-      - say_goodbye
+      - build
+      - test
