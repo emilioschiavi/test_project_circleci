@@ -11,17 +11,15 @@ jobs:
       - run: pwd
       - run: ls
       - run: cmake -Bbuild ./
-      - run: cd build
+      - run: (cd ./build && make)
       - run: pwd
       - run: ls
-      - run: make
-      - run: cd ..
   # Test
   test:
     docker:
      - image: cimg/base:2022.05
     steps:
-      - run: build/test
+      - run: ./build/test
 
 workflows:
   build_and_test:
