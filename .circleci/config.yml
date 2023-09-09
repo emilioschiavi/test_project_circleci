@@ -32,10 +32,10 @@ jobs:
       - run: pwd
       - run: ls
       - attach_workspace:
-          at: build
+          at: ./
       - run: pwd
       - run: ls
-      - run: ls build
+      - run: ./test
 
 workflows:
   build_and_test:
