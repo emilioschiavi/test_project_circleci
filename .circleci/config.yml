@@ -20,10 +20,17 @@ jobs:
       - run: ls
       - run: ls build
       - run: build/test
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - build/test
+
   # Test
   test:
     executor: my-executor
     steps:
+      - attach_workspace:
+          at: /workspace
       - run: pwd
       - run: ls
 
