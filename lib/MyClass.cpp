@@ -9,5 +9,5 @@ int32_t MyClass::Foo(int32_t x, int32_t y) const
         return -y;
     }
 
-    return x + y + 1;
+    return x + y;
 }
