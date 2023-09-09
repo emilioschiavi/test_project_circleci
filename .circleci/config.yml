@@ -16,10 +16,6 @@ jobs:
       - run: ls
       - run: cmake -Bbuild ./
       - run: (cd ./build && make)
-      - run: pwd
-      - run: ls
-      - run: ls build
-      - run: build/test
       - persist_to_workspace:
           root: build
           paths:
@@ -29,12 +25,8 @@ jobs:
   test:
     executor: my-executor
     steps:
-      - run: pwd
-      - run: ls
       - attach_workspace:
           at: ./
-      - run: pwd
-      - run: ls
       - run: ./test
 
 workflows:
