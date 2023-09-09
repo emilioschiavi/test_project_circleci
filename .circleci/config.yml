@@ -5,7 +5,7 @@ executors:
   my-executor:
     docker:
       - image: cimg/base:2022.05
-    working_directory: /tmp
+    working_directory: ./
 
 jobs:
   # Build
@@ -28,13 +28,12 @@ jobs:
     executor: my-executor
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+          at: /workspace
       - run: pwd
       - run: ls
-      - run: ls /tmp
-      - run: ls /tmp/workspace
-      - run: ls /tmp/workspace/build
-      - run: /tmp/workspace/build/test
+      - run: ls /workspace
+      - run: ls /workspace/build
+      - run: /workspace/build/test
 
 workflows:
   build_and_test:
