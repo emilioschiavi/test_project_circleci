@@ -27,7 +27,9 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
-      - run: ./test
+      - run: ./test --gtest_output=XML
+      - store_test_results:
+          path: ./
 
 workflows:
   build_and_test:
