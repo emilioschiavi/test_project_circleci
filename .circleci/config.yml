@@ -18,8 +18,8 @@ jobs:
       - run: (cd ./build && make)
       - run: pwd
       - run: ls
-      - run: ls /build
-      - run: /build/test
+      - run: ls build
+      - run: build/test
   # Test
   test:
     executor: my-executor
