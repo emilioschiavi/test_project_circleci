@@ -1,11 +1,16 @@
 # CircleCI configuration file
 version: 2.1
 
+executors:
+  my-executor:
+    docker:
+      - image: cimg/base:2022.05
+    working_directory: /tmp
+
 jobs:
   # Build
   build:
-    docker:
-     - image: cimg/base:2022.05
+    executor: my-executor
     steps:
       - checkout
       - run: pwd
@@ -14,15 +19,22 @@ jobs:
       - run: (cd ./build && make)
       - run: pwd
       - run: ls
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - ./build/test
   # Test
   test:
-    docker:
-     - image: cimg/base:2022.05
+    executor: my-executor
     steps:
+      - attach_workspace:
+          at: /tmp/workspace
       - run: pwd
       - run: ls
-      - run: ls ./build
-      - run: ./build/test
+      - run: ls /tmp
+      - run: ls /tmp/workspace
+      - run: ls /tmp/workspace/build
+      - run: /tmp/workspace/build/test
 
 workflows:
   build_and_test:
